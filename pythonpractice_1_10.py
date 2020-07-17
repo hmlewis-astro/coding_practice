@@ -8,6 +8,11 @@ Python Version: 3.7
 These are a bunch of silly practice problems from practicepython.org. Exercises 1-10 are included here.
 '''
 
+def main():
+    for arg in sys.argv[1:]:
+        
+
+
 def char_input():
     '''
     Create a program that asks the user to enter their name and their age. Print out a message addressed to them that tells them the year that they will turn 100 years old.
@@ -130,8 +135,4 @@ def list_overlap():
         
 if __name__ == '__main__':
 
-    #char_input()
-    #odd_even()
-    #list_less_than()
-    #divisors()
-    list_overlap()
+    main()

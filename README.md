@@ -1,17 +1,17 @@
 # Practice Python
 
-This is my work on some of the problems at [practicepython.org](practicepython.org). I thought they were a nice way to show my ability to write clean, well-documented code
+This is my work on some of the problems at [practicepython.org](practicepython.org). They're beginner exercises, but I thought they were a nice way to show my ability to write clean, well-documented code.
 
 ## Usage example
 
 To run the each component of the pipeline:
 
 ```sh
-python pythonpractice_1_10.py --num 1
+python pythonpractice_low_high.py num
 ```
-where --num
+where `num` can be replaced by any number in the range `low` to `high`, and each number corresponds to an exercise on the Practice Python website. 
 
-## Meta
+## Author
 
 Hannah Lewis – hlewis@virginia.edu
 
