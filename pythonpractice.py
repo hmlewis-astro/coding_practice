@@ -8,11 +8,6 @@ Python Version: 3.7
 These are a bunch of silly practice problems from practicepython.org. Exercises 1-10 are included here.
 '''
 
-def main():
-    for arg in sys.argv[1:]:
-        
-
-
 def char_input():
     '''
     Create a program that asks the user to enter their name and their age. Print out a message addressed to them that tells them the year that they will turn 100 years old.
@@ -27,8 +22,8 @@ def char_input():
     name = input("What is your name?: ")
     age = int(input("And (we know it's not polite to ask but...) what is your age (as a whole number, please)?: "))
     
-    year, _, _, _, _ = map(int, time.strftime("%Y %m %d %H %M").split())
-    year_100 = year - age + 100
+    year, _, _, _, _ = map(int, time.strftime("%Y %m %d %H %M").split()) # Get the current year
+    year_100 = year - age + 100 # Calculate what year they'll turn 100
     
     times = int(input("How many times would you like to see the message I'm about to print out?: "))
     
@@ -50,13 +45,15 @@ def odd_even():
     num = int(input("Give me an integer, please!: "))
     check = int(input("What number do you want to divide {} by?: ".format(num)))
     
-    if num % 4 == 0:
+    assert num > check, "We're only doing integer division here! The divisor you gave is larger than the dividend."
+    
+    if num % 4 == 0: # Mod
         print(str(num) + " is a multiple of 4.")
     elif num % 2 == 0:
         print(str(num) + " is an even number!")
     elif num % 2 == 1:
         print(str(num) + " is an odd number!")
-        
+    
     if num % check == 0:
         print("And it's also divisible by " + str(check) + ".")
     elif num % check == 1:
@@ -76,11 +73,11 @@ def list_less_than():
     Ask the user for a number and return a list that contains only elements from the original list a that are smaller than that number given by the user.
     '''
     
-    a = [1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89]
+    a = [1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89] # Sample list here, can be substituted/changed
     
     num = int(input("Give me an integer, please!: "))
     
-    b = [x for x in a if x <= num]
+    b = [x for x in a if x <= num] # List with numbers smaller than the input
     print(b)
     
 def divisors():
@@ -92,7 +89,7 @@ def divisors():
     
     num = int(input("Give me an integer, please!: "))
     
-    x = np.arange(1,num)
+    x = np.arange(1,num+1) # Generate an array of numbers between 1 and the number input
     
     div = []
     for n in x:
@@ -119,20 +116,40 @@ def list_overlap():
     
     import random
     
-    n1 = random.randint(1,20)
-    a = random.sample(range(0, 50), n1)
+    n1 = random.randint(1,20) # Random length of first list
+    a = random.sample(range(0, 50), n1) # First list of random length and random numbers
 
-    n2 = random.randint(1,20)
-    b = random.sample(range(0, 50), n2)
+    n2 = random.randint(1,20) # Random length of second list
+    b = random.sample(range(0, 50), n2) # Second list of random length and random numbers
     
     list_overlap = []
     for i in a:
-        if i in b and i not in list_overlap:
+        if i in b and i not in list_overlap: # Find intersection/overlap
             list_overlap.append(i)
     
     print(list_overlap)
     
-        
-if __name__ == '__main__':
+def string_list():
+    '''
+    Ask the user for a string and print out whether this string is a palindrome or not. (A palindrome is a string that reads the same forwards and backwards.)
+    '''
+    
+    word = input("Input a word, and I'll check to see if it is a palindrome (not case sensitive): ")
+    
+    backwards = word[::-1] # Get the word, backwards
 
-    main()
+    if word.lower() == backwards.lower(): # Compares the strings, ignoring case
+        print("The word is a palindrome!")
+    else:
+        print("The word is not a palindrome.")
+    
+    
+    
+function_dict = {'1':char_input, '2':odd_even, '3':list_less_than, '4':divisors, '5':list_overlap,
+                 '6':string_list} # What exercise corresponds to each function
+
+exercise = input("Which exercise do you want to run?: ")
+print("Exercise " + exercise)
+
+function_dict[exercise]() # Runs exercise
+    
