@@ -15,9 +15,11 @@ def char_input():
     Extras:
 
     Add on to the previous program by asking the user for another number and printing out that many copies of the previous message. (Hint: order of operations exists in Python)
-    Print out that many copies of the previous message on separate lines. (Hint: the string "\n is the same as pressing the ENTER button)
+    Print out that many copies of the previous message on separate lines.
     '''
     import time
+    
+    print("This exercise will tell you in what year you will turn 100.\n")
     
     name = input("What is your name?: ")
     age = int(input("And (we know it's not polite to ask but...) what is your age (as a whole number, please)?: "))
@@ -41,6 +43,8 @@ def odd_even():
     If the number is a multiple of 4, print out a different message.
     Ask the user for two numbers: one number to check (call it num) and one number to divide by (check). If check divides evenly into num, tell that to the user. If not, print a different appropriate message.
     '''
+    
+    print("This exercise will tell you if a number is even or odd, and if it is divisible by another integer.\n")
     
     num = int(input("Give me an integer, please!: "))
     check = int(input("What number do you want to divide {} by?: ".format(num)))
@@ -73,6 +77,8 @@ def list_less_than():
     Ask the user for a number and return a list that contains only elements from the original list a that are smaller than that number given by the user.
     '''
     
+    print("This exercise will tell you, from a predefined list of numbers, which ones are less than another number.\n")
+    
     a = [1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89] # Sample list here, can be substituted/changed
     
     num = int(input("Give me an integer, please!: "))
@@ -87,6 +93,8 @@ def divisors():
     
     import numpy as np
     
+    print("This exercise will give you all the divisors of a number.\n")
+    
     num = int(input("Give me an integer, please!: "))
     
     x = np.arange(1,num+1) # Generate an array of numbers between 1 and the number input
@@ -99,6 +107,8 @@ def divisors():
             continue
     
     print(str(num) + " is divisible by {}.".format(div))
+    
+    return(div)
     
 def list_overlap():
     '''
@@ -115,6 +125,8 @@ def list_overlap():
     '''
     
     import random
+    
+    print("This exercise will generate two random lists of random lengths, and then tell you their intersection.\n")
     
     n1 = random.randint(1,20) # Random length of first list
     a = random.sample(range(0, 50), n1) # First list of random length and random numbers
@@ -134,6 +146,8 @@ def string_list():
     Ask the user for a string and print out whether this string is a palindrome or not. (A palindrome is a string that reads the same forwards and backwards.)
     '''
     
+    print("This exercise will tell you if a word is a palindrome.\n")
+    
     word = input("Input a word, and I'll check to see if it is a palindrome (not case sensitive): ")
     
     backwards = word[::-1] # Get the word, backwards
@@ -147,6 +161,9 @@ def list_comp():
     '''
     Let’s say I give you a list saved in a variable: a = [1, 4, 9, 16, 25, 36, 49, 64, 81, 100]. Write one line of Python that takes this list a and makes a new list that has only the even elements of this list in it.
     '''
+    
+    print("This exercise will tell you all the even elements of a predefined list.\n")
+    
     a = [1, 4, 9, 16, 25, 36, 49, 64, 81, 100]
     b = [x for x in a if x % 2 == 0] # Get even elements
     
@@ -167,6 +184,8 @@ def rps():
     '''
     
     import random
+    
+    print("This exercise is an infinite game of Rock, Paper, Scissors between the player and the CPU.\n")
     
     game_dict = {'rock': 1, 'scissors': 2, 'paper': 3}
         
@@ -190,7 +209,7 @@ def rps():
     
         if dif in [-1,2]: # Compare throws to find winner
             print("Player wins!")
-            if input("Do you want to play another game, yes or no?: ") == 'yes':
+            if input("Do you want to play another game, yes or no?: ").lower() == 'yes':
                 continue
             else:
                 print("Good game!")
@@ -198,7 +217,7 @@ def rps():
                 
         elif dif in [-2,1]: # Compare throws to find winner
             print("CPU wins!")
-            if input("Do you want to play another game, yes or no?: ") == 'yes':
+            if input("Do you want to play another game, yes or no?: ").lower() == 'yes':
                 continue
             else:
                 print("Good game!")
@@ -206,7 +225,7 @@ def rps():
                 
         else: # Or tie
             print("It's a tie!")
-            if input("Do you want to play another game, yes or no?: ") == 'yes':
+            if input("Do you want to play another game, yes or no?: ").lower() == 'yes':
                 continue
             else:
                 print("Good game!")
@@ -214,7 +233,7 @@ def rps():
                 
 def guessing_game():
     '''
-    Generate a random number between 1 and 9 (including 1 and 9). Ask the user to guess the number, then tell them whether they guessed too low, too high, or exactly right.
+    Generate a random number between 1 and 10 (including 1 and 10). Ask the user to guess the number, then tell them whether they guessed too low, too high, or exactly right.
 
     Extras:
 
@@ -224,11 +243,13 @@ def guessing_game():
     
     import random
     
+    print("This exercise will ask you to guess what number the CPU has thought of.\n")
+    
     print("You can type 'exit' at any time to end the game.")
     
-    num = random.randint(1,9) # Get random number
+    num = random.randint(1,10) # Get random number
     
-    guess = input("Guess a number between 1 and 9: ") # Get first guess
+    guess = input("Guess a number between 1 and 10: ") # Get first guess
     count = 0
     
     guessing = True
@@ -272,6 +293,8 @@ def list_overlap_v2():
     
     import random
     
+    print("This exercise will generate two random lists of random lengths, and then tell you their intersection, using sets instead of list comprehension.\n")
+
     n1 = random.randint(1,20) # Random length of first list
     a = set(random.sample(range(0, 50), n1)) # First set of random length and random numbers
 
@@ -282,12 +305,283 @@ def list_overlap_v2():
     
     print(list_overlap)
     
+def check_prime():
+    '''
+    Ask the user for a number and determine whether the number is prime or not. (For those who have forgotten, a prime number is a number that has no divisors.).
+    '''
     
+    import numpy as np
+    
+    print("This exercise will tell you if a number is a prime number.\n")
+        
+    div = divisors() # Run divisors exercise
+    
+    if len(div) == 2:
+        print("So it is a prime number!") # Prime if only divisible by 1 and itself
+    else:
+        print("It's NOT a prime number.")
+        
+def first_last():
+    '''
+    Write a program that takes a list of numbers (for example, a = [5, 10, 15, 20, 25]) and makes a new list of only the first and last elements of the given list. For practice, write this code inside a function.
+    '''
+    
+    print("This exercise returns an array of the first and last elements of a predefined list.\n")
+    
+    a = [5, 10, 15, 20, 25, 30, 35, 40, 45, 50]
+    
+    print([a[0], a[-1]]) # Create list of first and last elements
+    
+    return [a[0], a[-1]]
+    
+def fib():
+    '''
+    Write a program that asks the user how many Fibonnaci numbers to generate and then generates them.
+    '''
+    
+    print("This exercise returns list of Fibonacci numbers.\n")
+    
+    num = int(input("How many Fibonacci numbers would you like to generate?: "))
+    
+    i = 1
+    
+    if num == 0:
+        f = []
+    elif num == 1:
+        f = [1]
+    elif num == 2:
+        f = [1, 1]
+    else:
+        f = [1, 1]
+        while i < (num-1):
+            f.append(f[i] + f[i-1])
+            i += 1
+    
+    print(f)
+    
+    return f
+    
+def remove_duplicates():
+    '''
+    Write a program (function!) that takes a list and returns a new list that contains all the elements of the first list minus all the duplicates.
+
+    Extras:
+
+    Write two different functions to do this - one using a loop and constructing a list, and another using sets.
+    Go back and do Exercise 5 using sets, and write the solution for that in a different function.
+    '''
+    
+    import random
+    
+    print("This exercise returns a unique list of numbers from a list.\n")
+    
+    n1 = random.randint(1,20) # Random length of list
+    a = random.choices(range(1, 25), k=n1) # First list of random length and random numbers
+    print(a)
+    
+    #b = []
+    
+    #for i in a:
+        #if i not in b:
+            #b.append(i)
+                
+    #return b
+    
+    print(list(set(a)))
+    
+    return list(set(a))
+    
+def reverse_word():
+    '''
+    Write a program (using functions!) that asks the user for a long string containing multiple words. Print back to the user the same string, except with the words in backwards order. For example, say I type the string:
+
+      My name is Michele
+    Then I would see the string:
+
+      Michele is name My
+    shown back to me.
+    '''
+    
+    print("This exercise returns words in the reverse order.\n")
+    
+    sentence = input("Write a sentence. ")
+        
+    print(' '.join(sentence.split(' ')[::-1]))
+    
+    return ' '.join(sentence.split(' ')[::-1])
+    
+def pass_gen():
+    '''
+    Write a password generator in Python. Be creative with how you generate passwords - strong passwords have a mix of lowercase letters, uppercase letters, numbers, and symbols. The passwords should be random, generating a new password every time the user asks for a new password. Include your run-time code in a main method.
+    '''
+    
+    import string
+    import random
+    
+    print("This exercise returns a randomly generated password.\n")
+    
+    length = int(input("How many characters do you want in your password? "))
+    
+    chars=string.ascii_letters + string.digits + string.punctuation
+    
+    password = ''.join(random.choice(chars) for _ in range(length))
+
+    print("Here's your password: ", password)
+    
+    return password
+    
+def read_web_page():
+    '''
+    Use the BeautifulSoup and requests Python packages to print out a list of all the article titles on the New York Times homepage.
+    '''
+    
+    import requests
+    from bs4 import BeautifulSoup
+    
+    print("This exercise returns a list of articles on the NYT homepage.\n")
+    
+    headers = {'User-Agent':'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_2) AppleWebKit/601.3.9 (KHTML, like Gecko) Version/9.0.2 Safari/601.3.9'}
+    site = 'https://www.nytimes.com/'
+    response = requests.get(site,headers=headers)
+    soup = BeautifulSoup(response.content, 'lxml')
+    for item in soup.select('.assetWrapper'):
+        try:
+            print('---------------------')
+            headline = item.find('h2').get_text()
+            link = item.find('a')['href']
+            summary = item.find('p').get_text()
+            print(headline)
+            print(link)
+            print(summary)
+        except Exception as e: #raise e
+            print('')
+            
+def cows_bulls():
+    '''
+    Create a program that will play the “cows and bulls” game with the user. The game works like this:
+
+    Randomly generate a 4-digit number. Ask the user to guess a 4-digit number. For every digit that the user guessed correctly in the correct place, they have a “cow”. For every digit the user guessed correctly in the wrong place is a “bull.” Every time the user makes a guess, tell them how many “cows” and “bulls” they have. Once the user guesses the correct number, the game is over. Keep track of the number of guesses the user makes throughout the game and tell the user at the end.
+    '''
+    
+    import random
+    
+    print("This exercise is a game of Cow-Bull.\n")
+    print("You will try to guess a random 4-digit number.\n")
+    print("A 'cow' is a correct digit in the correct place.\n")
+    print("A 'bull' is a correct digit in the wrong place.\n")
+    print("The game ends when you get 4 cows!\n")
+    
+    print("You can type 'exit' at any time to end the game.")
+    
+    num = str(random.randint(10000, 99999))[1:5] # Get random number, remove first digit so that first digit can be 0
+    
+    guess = input("Give me your best guess: ") # Get first guess
+    
+    count = 0
+    cow = 0
+    bull = 0
+    
+    guessing = True
+    
+    while guessing:
+    
+        assert len(guess) == 4, "Input must be 4-digits long."
+    
+        if guess == 'exit': # Player can exit at any time
+            print("The number was", num, ".")
+            guessing = False
+                
+        count += 1
+        
+        for i in range(0,4): # Compare digits
+            if num[i] == guess[i]:
+                cow+=1
+            elif num[i] in guess:
+                bull+=1
+        print("You got {} cows, and {} bulls.".format(cow,bull)) # How many cows and bulls
+        
+        if cow == 4: # If all digits are correct
+            if count == 1:
+                print("You got it on the first try!")
+                guessing = False
+            if count > 1:
+                print("You got it! It took you", count, "tries.")
+                print("The number was", num, ".")
+                guessing = False
+        elif guess.lower() == 'exit': # If player wants to exit
+            print("The number was", num, ".")
+            print("Better luck next time.")
+            guessing = False
+        else: # Guess again
+            cow = bull = 0
+            guess = input("Guess again: ")
+            
+def read_web_page_v2():
+    '''
+    Using the requests and BeautifulSoup Python libraries, print to the screen the full text of the article on this website: http://www.vanityfair.com/society/2014/06/monica-lewinsky-humiliation-culture.
+
+    The article is long, so it is split up between 4 pages. Your task is to print out the text to the screen so that you can read the full article without having to click any buttons.
+
+    This will just print the full text of the article to the screen. It will not make it easy to read, so next exercise we will learn how to write this text to a .txt file.
+    '''
+    
+    import requests
+    from bs4 import BeautifulSoup
+    import csv
+    
+    print("This exercise returns the text of an article at a predefined URL to a text file called 'article.txt'.\n")
+    
+    headers = {'User-Agent':'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_2) AppleWebKit/601.3.9 (KHTML, like Gecko) Version/9.0.2 Safari/601.3.9'}
+    site = 'http://www.vanityfair.com/society/2014/06/monica-lewinsky-humiliation-culture'
+    response = requests.get(site,headers=headers)
+    soup = BeautifulSoup(response.text, 'html.parser')
+    
+    article = soup.select('p')
+    cleaned = []
+
+    for i in article:
+        temp = i.text.replace("<span>","")
+        cleaned.append(temp)
+    
+    with open('article.txt','w') as txt:
+        for line in cleaned:
+            txt.write(line)
+            
+def elem_search():
+    '''
+    Write a function that takes an ordered list of numbers (a list where the elements are in order from smallest to largest) and another number. The function decides whether or not the given number is inside the list and returns (then prints) an appropriate boolean.
+    '''
+    
+    import random
+    
+    print("This exercise tells you if a number is in a random list of numbers.\n")
+    
+    num = int(input("Give me an integer, please! (between 1 and 100): "))
+
+    n1 = random.randint(10,20) # Random length of list
+    a = sorted(random.sample(range(1, 100), n1)) # List of random length and random numbers
+    print(a)
+    
+    print(num in a)
+    
+    return num in a
+        
 function_dict = {'1':char_input, '2':odd_even, '3':list_less_than, '4':divisors, '5':list_overlap,
-                 '6':string_list, '7':list_comp, '8':rps, '9':guessing_game, '10':list_overlap_v2} # What exercise corresponds to each function
+                 '6':string_list, '7':list_comp, '8':rps, '9':guessing_game, '10':list_overlap_v2,
+                 '11':check_prime, '12':first_last, '13':fib, '14':remove_duplicates, '15': reverse_word,
+                 '16':pass_gen, '17':read_web_page, '18':cows_bulls, '19':read_web_page_v2, '20':elem_search} # What exercise corresponds to each function
 
 exercise = input("Which exercise do you want to run?: ")
 print("Exercise " + exercise)
 
 function_dict[exercise]() # Runs exercise
+
+'''
+if __name__ == '__main__':
+    char_input()
+    odd_even()
+    list_less_than()
+    divisors()
+    list_overlap()
+'''
     
