@@ -488,8 +488,9 @@ def cows_bulls():
         assert len(guess) == 4, "Input must be 4-digits long."
     
         if guess == 'exit': # Player can exit at any time
-            print("The number was", num, ".")
+            print("The number was " + str(num) + ".")
             guessing = False
+            break
                 
         count += 1
         
@@ -506,10 +507,10 @@ def cows_bulls():
                 guessing = False
             if count > 1:
                 print("You got it! It took you", count, "tries.")
-                print("The number was", num, ".")
+                print("The number was " + str(num) + ".")
                 guessing = False
         elif guess.lower() == 'exit': # If player wants to exit
-            print("The number was", num, ".")
+            print("The number was " + str(num) + ".")
             print("Better luck next time.")
             guessing = False
         else: # Guess again
@@ -565,23 +566,210 @@ def elem_search():
     print(num in a)
     
     return num in a
+    
+def read_web_page_v3():
+    '''
+    Take the code from the How To Decode A Website exercise (if you didn’t do it or just want to play with some different code, use the code from the solution), and instead of printing the results to a screen, write the results to a txt file. In your code, just make up a name for the file you are saving to.
+
+    Extras:
+
+    Ask the user to specify the name of the output file that will be saved.
+    '''
+
+    import requests
+    from bs4 import BeautifulSoup
+    import csv
+
+    print("This exercise returns the text of an article at a predefined URL to a text file named based on user input.\n")
+
+    headers = {'User-Agent':'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_2) AppleWebKit/601.3.9 (KHTML, like Gecko) Version/9.0.2 Safari/601.3.9'}
+    site = 'http://www.vanityfair.com/society/2014/06/monica-lewinsky-humiliation-culture'
+    response = requests.get(site,headers=headers)
+    soup = BeautifulSoup(response.text, 'html.parser')
+
+    article = soup.select('p')
+    cleaned = []
+    
+    name = input("What do you want the file to be called?: ")
+
+    for i in article:
+        temp = i.text.replace("<span>","")
+        cleaned.append(temp)
+
+    with open(name + '.txt','w') as txt:
+        for line in cleaned:
+            txt.write(line)
+            
+def read_file():
+    '''
+    Given a .txt file that has a list of a bunch of names, count how many of each name there are in the file, and print out the results to the screen. I have a .txt file for you, if you want to use it!
+
+    Extra:
+
+    Instead of using the .txt file from above, take this .txt file, and count how many of each “category” of each image there are. This text file is actually a list of files corresponding to the SUN database scene recognition database, and lists the file directory hierarchy for the images. Once you take a look at the first line or two of the file, it will be clear which part represents the scene category. To do this, you’re going to have to remember a bit about string parsing in Python 3.
+    '''
+    
+    print("This exercise opens a text file, reads the rows, and returns how many of each thing are in the file.\n")
+    
+    names_dict = {}
+    with open('nameslist.txt','r') as f:
+        line = f.readline()
+        while line:
+            line = line.strip()
+            if line in names_dict:
+                names_dict[line] += 1
+            else:
+                names_dict[line] = 1
+            line = f.readline()
+            
+    print(names_dict)
+    
+    scenes_dict = {}
+    with open('SUNscenes.txt','r') as f:
+        line = f.readline()
+        while line:
+            line = line[3:-26]
+            if line in scenes_dict:
+                scenes_dict[line] += 1
+            else:
+                scenes_dict[line] = 1
+            line = f.readline()
+            
+    print(scenes_dict)
+    
+    return names_dict, scenes_dict
+
+def file_overlap():
+    '''
+    Given two .txt files that have lists of numbers in them, find the numbers that are overlapping. One .txt file has a list of all prime numbers under 1000, and the other .txt file has a list of happy numbers up to 1000.
+
+    (If you forgot, prime numbers are numbers that can’t be divided by any other number. And yes, happy numbers are a real thing in mathematics - you can look it up on Wikipedia.)
+    '''
+    
+    print("This exercise opens two text files, reads the rows, and finds the overlap of the numbers in the files.\n")
+    
+    primes = []
+    with open('primes.txt','r') as f:
+        line = f.readline()
+        while line:
+            primes.append(int(line))
+            line = f.readline()
+    primes = set(primes)
+    
+    happy = []
+    with open('happy.txt','r') as f:
+        line = f.readline()
+        while line:
+            happy.append(int(line))
+            line = f.readline()
+    happy = set(happy)
+    
+    overlap = sorted(list(primes & happy))
+    
+    print(overlap)
+            
+    return overlap
+    
+def draw_gameboard():
+    '''
+    This exercise is Part 1 of 4 of the Tic Tac Toe exercise series.
+
+    Time for some fake graphics! Let’s say we want to draw game boards that look like this:
+
+     --- --- ---
+    |   |   |   |
+     --- --- ---
+    |   |   |   |
+     --- --- ---
+    |   |   |   |
+     --- --- ---
+     
+    This one is 3x3 (like in tic tac toe). Obviously, they come in many other sizes (8x8 for chess, 19x19 for Go, and many more).
+
+    Ask the user what size game board they want to draw, and draw it for them to the screen using Python’s print statement.
+    '''
+
+    print("This exercise prints a square 2-D game board based on user input.\n")
+    
+    size = int(input("How large do you want your game board to be?: "))
+
+    for x in range(size):
+        print(' ---' * size)
+        print('|   ' * (size+1))
+    print(' ---' * size)
+    
+def guessing_game_v2():
+    '''
+    In a previous exercise, we’ve written a program that “knows” a number and asks a user to guess it.
+
+    This time, we’re going to do exactly the opposite. You, the user, will have in your head a number between 0 and 100. The program will guess a number, and you, the user, will say whether it is too high, too low, or your number.
+
+    At the end of this exchange, your program should print out how many guesses it took to get your number.
+
+    As the writer of this program, you will have to choose how your program will strategically guess. A naive strategy can be to simply start the guessing at 1, and keep going (2, 3, 4, etc.) until you hit the number. But that’s not an optimal guessing strategy. An alternate strategy might be to guess 50 (right in the middle of the range), and then increase / decrease by 1 as needed. After you’ve written the program, try to find the optimal strategy! (We’ll talk about what is the optimal one next week with the solution.)
+    '''
+
+    import random
+    import time
+
+    print("This exercise will ask you to think of a number, and the CPU will try to guess the number.\n")
+
+    print("You can type 'exit' at any time to end the game.")
+    
+    min = 1
+    max = 100
+
+    print("You have 5 seconds to think of a number between {} and {}...".format(min, max))
+    
+    time.sleep(5)
+    
+    count = 0
+    CPU = random.randint(min,max) # Generate the first guess
+    print("Okay, the CPU has the first guess: {}".format(CPU))
+    
+    answering = True
+
+    while answering:
+    
+        ans = input("Is this the number you were thinking of? (yes, high, or low): ")
+    
+        if ans == 'exit': # Player can exit at any time
+            break
+                                
+        count += 1
         
-function_dict = {'1':char_input, '2':odd_even, '3':list_less_than, '4':divisors, '5':list_overlap,
-                 '6':string_list, '7':list_comp, '8':rps, '9':guessing_game, '10':list_overlap_v2,
-                 '11':check_prime, '12':first_last, '13':fib, '14':remove_duplicates, '15': reverse_word,
-                 '16':pass_gen, '17':read_web_page, '18':cows_bulls, '19':read_web_page_v2, '20':elem_search} # What exercise corresponds to each function
+        if ans.lower() == 'yes':
+            if count == 1:
+                print("The CPU got it on the first try!")
+                answering = False
+            if count > 1:
+                print("The CPU got it! It took", count, "tries.")
+                answering = False
+        elif ans.lower() == 'high':
+            max = CPU-1
+            CPU = random.randint(min,max) # Generate the next guess
+            print("Guess: {}".format(CPU))
+            answering = True
+        elif ans.lower() == 'low':
+            min = CPU+1
+            CPU = random.randint(min,max) # Generate the next guess
+            print("Guess: {}".format(CPU))
+            answering = True
+        elif ans.lower() == 'exit':
+            print("Better luck next time, CPU!")
+            answering = False
 
-exercise = input("Which exercise do you want to run?: ")
-print("Exercise " + exercise)
 
-function_dict[exercise]() # Runs exercise
-
-'''
 if __name__ == '__main__':
-    char_input()
-    odd_even()
-    list_less_than()
-    divisors()
-    list_overlap()
-'''
+
+    function_dict = {'1':char_input, '2':odd_even, '3':list_less_than, '4':divisors, '5':list_overlap,
+                     '6':string_list, '7':list_comp, '8':rps, '9':guessing_game, '10':list_overlap_v2,
+                     '11':check_prime, '12':first_last, '13':fib, '14':remove_duplicates, '15': reverse_word,
+                     '16':pass_gen, '17':read_web_page, '18':cows_bulls, '19':read_web_page_v2, '20':elem_search,
+                     '21':read_web_page_v3, '22':read_file, '23':file_overlap, '24':draw_gameboard, '25':guessing_game_v2} # What exercise corresponds to each function
+
+    exercise = input("Which exercise do you want to run?: ")
+    print("Exercise " + exercise)
+
+    function_dict[exercise]() # Runs exercise
     
