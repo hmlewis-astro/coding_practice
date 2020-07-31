@@ -758,6 +758,193 @@ def guessing_game_v2():
         elif ans.lower() == 'exit':
             print("Better luck next time, CPU!")
             answering = False
+            
+def check_tic_tac_toe():
+    '''
+    Today, we will simply focus on checking whether someone has WON a game of Tic Tac Toe, not worrying about how the moves were made.
+
+    If a game of Tic Tac Toe is represented as a list of lists, like so:
+
+    game = [[1, 2, 0],
+            [2, 1, 0],
+            [2, 1, 1]]
+    where a 0 means an empty square, a 1 means that player 1 put their token in that space, and a 2 means that player 2 put their token in that space.
+
+    Your task this week: given a 3 by 3 list of lists that represents a Tic Tac Toe game board, tell me whether anyone has won, and tell me which player won, if any. A Tic Tac Toe win is 3 in a row - either in a row, a column, or a diagonal. Don’t worry about the case where TWO people have won - assume that in every board there will only be one winner.
+    '''
+    
+    print("This exercise checks the winner of a game of tic-tac-toe.")
+    
+    def check_grid(grid):
+    
+        for x in range(0,3): # Define what a win looks like in a row
+            row = set([grid[x][0],grid[x][1],grid[x][2]])
+            if len(row) == 1 and grid[x][0] != 0:
+                return grid[x][0]
+
+        for x in range(0,3): # Define what a win looks like in a column
+            column = set([grid[0][x],grid[1][x],grid[2][x]])
+            if len(column) == 1 and grid[0][x] != 0:
+                return grid[0][x]
+
+        diag1 = set([grid[0][0],grid[1][1],grid[2][2]])
+        diag2 = set([grid[0][2],grid[1][1],grid[2][0]]) # Define what a win looks like on a diagonal
+        if len(diag1) == 1 or len(diag2) == 1 and grid[1][1] != 0:
+            return grid[1][1]
+            
+        return None
+        
+    winner_is_1 = [[1, 2, 0],
+                   [2, 1, 0],
+                   [2, 1, 1]]
+    winner_is_also_1 = [[0, 1, 0],
+                        [2, 1, 0],
+                        [2, 1, 1]]
+    winner_is_2 = [[2, 2, 0],
+                   [2, 1, 0],
+                   [2, 1, 1]]
+    no_winner = [[1, 2, 0],
+                 [2, 1, 0],
+                 [2, 1, 2]]
+    also_no_winner = [[1, 2, 0],
+                      [2, 1, 0],
+                      [2, 1, 0]]
+    first_move = [[0, 0, 0],
+                  [0, 1, 0],
+                  [0, 0, 0]]
+                      
+    assert check_grid(winner_is_1) == 1, "Got the wrong winner"
+    assert check_grid(winner_is_also_1) == 1, "Got the wrong winner"
+    assert check_grid(winner_is_2) == 2, "Got the wrong winner"
+    assert check_grid(no_winner) == None, "Got the wrong winner"
+    assert check_grid(also_no_winner) == None, "Got the wrong winner"
+                   
+    print(check_grid(first_move))
+    
+def tic_tac_toe():
+    '''
+    The next logical step is to deal with handling user input. When a player (say player 1, who is X) wants to place an X on the screen, they can’t just click on a terminal. So we are going to approximate this clicking simply by asking the user for a coordinate of where they want to place their piece.
+
+    As a reminder, our tic tac toe game is really a list of lists. The game starts out with an empty game board like this:
+
+    game = [[0, 0, 0],
+            [0, 0, 0],
+            [0, 0, 0]]
+    The computer asks Player 1 (X) what their move is (in the format row,col), and say they type 1,3. Then the game would print out
+
+    game = [[0, 0, X],
+            [0, 0, 0],
+            [0, 0, 0]]
+    And ask Player 2 for their move, printing an O in that place.
+
+    Things to note:
+
+    For this exercise, assume that player 1 (the first player to move) will always be X and player 2 (the second player) will always be O.
+    Notice how in the example I gave coordinates for where I want to move starting from (1, 1) instead of (0, 0). To people who don’t program, starting to count at 0 is a strange concept, so it is better for the user experience if the row counts and column counts start at 1. This is not required, but whichever way you choose to implement this, it should be explained to the player.
+    Ask the user to enter coordinates in the form “row,col” - a number, then a comma, then a number. Then you can use your Python skills to figure out which row and column they want their piece to be in.
+    Don’t worry about checking whether someone won the game, but if a player tries to put a piece in a game position where there already is another piece, do not allow the piece to go there.
+    Bonus:
+
+    For the “standard” exercise, don’t worry about “ending” the game - no need to keep track of how many squares are full. In a bonus version, keep track of how many squares are full and automatically stop asking for moves when there are no more valid moves.
+    '''
+    
+    print("This exercise is a game of tic-tac-toe!")
+    
+    print("You can type 'exit' at any time to end the game.")
+    
+    def check_grid(grid):
+
+        for x in range(0,3): # Define what a win looks like in a row
+            row = set([grid[x][0],grid[x][1],grid[x][2]])
+            if len(row) == 1 and grid[x][0] != 0:
+                return grid[x][0]
+
+        for x in range(0,3): # Define what a win looks like in a column
+            column = set([grid[0][x],grid[1][x],grid[2][x]])
+            if len(column) == 1 and grid[0][x] != 0:
+                return grid[0][x]
+
+        diag1 = set([grid[0][0],grid[1][1],grid[2][2]])
+        diag2 = set([grid[0][2],grid[1][1],grid[2][0]]) # Define what a win looks like on a diagonal
+        if len(diag1) == 1 or len(diag2) == 1 and grid[1][1] != 0:
+            return grid[1][1]
+    
+        return 0
+        
+    def check_winner(grid):
+        winner = check_grid(grid)
+        return winner
+    
+    turn = 0
+    winner = 0
+    game = [[0, 0, 0],
+            [0, 0, 0],
+            [0, 0, 0]]
+            
+    playing = True
+
+    while playing and winner == 0:
+    
+        if turn % 2 == 0:
+            player_turn = '1'
+        else:
+            player_turn = '2'
+        
+        if turn % 2 == 0:
+            player_s = 'X'
+        else:
+            player_s = 'O'
+        play = input("Player {}, your turn! Where would you like to place your {} (row, col): ".format(player_turn, player_s))
+        
+        if play == 'exit': # Player can exit at any time
+            break
+    
+        col, row = play.split(',')
+        col = int(col)
+        row.strip(' ')
+        row = int(row)
+        
+        if game[col-1][row-1] != 0:
+            print('\nMust select an empty space which is not occupied by a player')
+            continue
+        else:
+            game[col-1][row-1] = str(player_s)
+    
+        print(game[0], '\n', game[1], '\n', game[2])
+        
+        winner = check_winner(game)
+    
+        turn += 1
+        
+    if winner != 0:
+        print("Player {} wins!".format(player_turn))
+        
+def max_of_three():
+    '''
+    Implement a function that takes as input three variables, and returns the largest of the three. Do this without using the Python max() function!
+
+    The goal of this exercise is to think about some internals that Python normally takes care of for us. All you need is some variables and if statements!
+    '''
+    
+    print("This exercise finds the largest of three numbers in a list, without using the max() function.")
+    
+    list = input("Give a list of 3 numbers, separated by commas: ")
+    
+    n1, n2, n3 = list.split(',')
+    n1 = float(n1.strip(' '))
+    n2 = float(n2.strip(' '))
+    n3 = float(n3.strip(' '))
+    
+    max = n1
+    
+    if n2 > max:
+        max = n2
+    if n3 > max:
+        max = n3
+
+    print(str(max) + " is the largest number in the list you gave.")
+    
+    return max
 
 
 if __name__ == '__main__':
@@ -766,7 +953,8 @@ if __name__ == '__main__':
                      '6':string_list, '7':list_comp, '8':rps, '9':guessing_game, '10':list_overlap_v2,
                      '11':check_prime, '12':first_last, '13':fib, '14':remove_duplicates, '15': reverse_word,
                      '16':pass_gen, '17':read_web_page, '18':cows_bulls, '19':read_web_page_v2, '20':elem_search,
-                     '21':read_web_page_v3, '22':read_file, '23':file_overlap, '24':draw_gameboard, '25':guessing_game_v2} # What exercise corresponds to each function
+                     '21':read_web_page_v3, '22':read_file, '23':file_overlap, '24':draw_gameboard, '25':guessing_game_v2,
+                     '26':check_tic_tac_toe, '27':tic_tac_toe, '28':max_of_three} # What exercise corresponds to each function
 
     exercise = input("Which exercise do you want to run?: ")
     print("Exercise " + exercise)
