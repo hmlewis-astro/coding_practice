@@ -2,7 +2,7 @@
 File name: pythonpractice.py
 Author: Hannah Lewis
 Date created: 07/17/2020
-Date last modified: 07/17/2020
+Date last modified: 08/01/2020
 Python Version: 3.7
 
 These are a bunch of silly practice problems from practicepython.org. Exercises 1-10 are included here.
@@ -821,7 +821,7 @@ def check_tic_tac_toe():
                    
     print(check_grid(first_move))
     
-def tic_tac_toe():
+def tic_tac_toe_input():
     '''
     The next logical step is to deal with handling user input. When a player (say player 1, who is X) wants to place an X on the screen, they can’t just click on a terminal. So we are going to approximate this clicking simply by asking the user for a coordinate of where they want to place their piece.
 
@@ -946,6 +946,16 @@ def max_of_three():
     
     return max
 
+def tic_tac_toe():
+    '''
+    This exercise is Part 4 of 4 of the Tic Tac Toe exercise series.
+
+    The final step is to put all these three components together to make a two-player Tic Tac Toe game! Your challenge in this exercise is to use the functions from those previous exercises all together in the same program to make a two-player game that you can play with a friend.
+    '''
+    
+    import tic_tac_toe
+    
+    tic_tac_toe.main()
 
 if __name__ == '__main__':
 
@@ -954,7 +964,7 @@ if __name__ == '__main__':
                      '11':check_prime, '12':first_last, '13':fib, '14':remove_duplicates, '15': reverse_word,
                      '16':pass_gen, '17':read_web_page, '18':cows_bulls, '19':read_web_page_v2, '20':elem_search,
                      '21':read_web_page_v3, '22':read_file, '23':file_overlap, '24':draw_gameboard, '25':guessing_game_v2,
-                     '26':check_tic_tac_toe, '27':tic_tac_toe, '28':max_of_three} # What exercise corresponds to each function
+                     '26':check_tic_tac_toe, '27':tic_tac_toe_input, '28':max_of_three, '29': tic_tac_toe} # What exercise corresponds to each function
 
     exercise = input("Which exercise do you want to run?: ")
     print("Exercise " + exercise)
