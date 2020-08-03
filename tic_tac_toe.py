@@ -117,10 +117,11 @@ def tic_tac_toe_input():
             player_s = 'O'
             
         play = input("Player {}, your turn! Where would you like to place your {} (row, col): ".format(player_turn, player_s)) # Ask for player input
-        
+
         if play == 'exit': # Player can exit at any time
             print("Play again soon!")
             playing = False
+            break
     
         col, row = play.split(',')
         col = int(col) # Get player-input column
@@ -140,11 +141,14 @@ def tic_tac_toe_input():
         if turn == 8 and winner == None: # If the board is full and there is no winner, end the game
             print("No winner. Play again soon!")
             playing = False
+            break
     
         turn += 1 # Increase the count of cells on the board that are filled to determine when the gameboard is full and the game ends
         
     if winner != None: # End the game when one of the players wins
         print("Player {} wins! Play again soon!".format(player_turn))
+        
+    #TODO: ask if they want to play another game, keep track of how many games Player 1 vs. Player 2 has won
         
 def main():
     '''

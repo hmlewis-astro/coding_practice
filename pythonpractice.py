@@ -894,6 +894,7 @@ def tic_tac_toe_input():
             player_s = 'X'
         else:
             player_s = 'O'
+            
         play = input("Player {}, your turn! Where would you like to place your {} (row, col): ".format(player_turn, player_s))
         
         if play == 'exit': # Player can exit at any time
@@ -956,6 +957,317 @@ def tic_tac_toe():
     import tic_tac_toe
     
     tic_tac_toe.main()
+    
+def pick_word():
+    '''
+    This exercise is Part 1 of 3 of the Hangman exercise series.
+    
+    In this exercise, the task is to write a function that picks a random word from a list of words from the SOWPODS dictionary. Download this file and save it in the same directory as your Python code. This file is Peter Norvig’s compilation of the dictionary of words used in professional Scrabble tournaments. Each line in the file contains a single word.
+
+    Hint: use the Python random library for picking a random word.
+    '''
+    
+    #print("This exercise opens the SOWPODS dictionary, reads the rows, and picks a random word from it.\n")
+    
+    import random
+    
+    words = []
+    with open('sowpods.txt','r') as f:
+        line = f.readline()
+        while line:
+            words.append(line)
+            line = f.readline()
+
+    random_word = random.choice(words)
+    
+    #print("Here's your random word: ", random_word)
+    
+    return random_word
+    
+def letters():
+    '''
+    This exercise is Part 2 of 3 of the Hangman exercise series. The other exercises are: Part 1 and Part 3.
+
+    Let’s continue building Hangman. In the game of Hangman, a clue word is given by the program that the player has to guess, letter by letter. The player guesses one letter at a time until the entire word has been guessed. (In the actual game, the player can only guess 6 letters incorrectly before losing).
+
+    Let’s say the word the player has to guess is “EVAPORATE”. For this exercise, write the logic that asks a player to guess a letter and displays letters in the clue word that were guessed correctly. For now, let the player guess an infinite number of times until they get the entire word. As a bonus, keep track of the letters the player guessed and display a different message if the player tries to guess that letter again. Remember to stop the game when all the letters have been guessed correctly! Don’t worry about choosing a word randomly or keeping track of the number of guesses the player has remaining - we will deal with those in a future exercise.
+
+    An example interaction can look like this:
+
+    >>> Welcome to Hangman!
+    _ _ _ _ _ _ _ _ _
+    >>> Guess your letter: S
+    Incorrect!
+    >>> Guess your letter: E
+    E _ _ _ _ _ _ _ E
+    ...
+    And so on, until the player gets the word.
+    '''
+    
+    print("This exercise is a game of hangman!\n")
+    
+    print("You can type 'exit' at any time to end the game.")
+    
+    def print_hangman(wrong):
+        gallows = [[' ----  '],
+                   ['|    | '],
+                   ['|      '],
+                   ['|      '],
+                   ['|      '],
+                   ['|      ']]
+                   
+        if wrong > 0:
+            gallows[2] = ['|    O ']
+        if wrong > 1:
+            gallows[3] = ['|    | ']
+        if wrong > 2:
+            gallows[3] = ['|   /| ']
+        if wrong > 3:
+            gallows[3] = ['|   /|\\']
+        if wrong > 4:
+            gallows[4] = ['|   /  ']
+        if wrong > 5:
+            gallows[4] = ['|   / \\']
+            
+        for i in gallows:
+            print(''.join(i))
+    
+    random_word = list(pick_word().strip('\n'))
+    
+    guessed = list('_'*len(random_word))
+    
+    guessed_list = []
+        
+    wrong = 0
+    
+    playing = True
+    
+    print(' '.join(guessed))
+
+    while playing:
+    
+        letter = input("Guess a letter: ")
+        
+        if letter == 'exit':
+            print("Play again soon!")
+            playing = False
+            break
+            
+        if letter.upper() in guessed:
+            letter = ''
+            print("You already guessed that letter!")
+            continue
+            
+        elif letter.upper() in random_word:
+            for idx, l in enumerate(random_word):
+                if letter.upper() == l:
+                    guessed[idx] = letter.upper()
+                    guessed_list.append(letter.upper())
+            print(' '.join(guessed))
+            print_hangman(wrong)
+            print("\n\n")
+            
+        else:
+            if letter.isalpha():
+                guessed_list.append(letter.upper())
+                print("{} is not in the word!\n".format(letter.upper()))
+                print(' '.join(guessed))
+                wrong += 1
+                print_hangman(wrong)
+                print("\n\n")
+            else:
+                print("Input must be a single letter, not a number or symbol.\n")
+                continue
+        
+        if wrong == 6:
+            print("Uh oh! You ran out of tries. The word was {}.".format(''.join(random_word)))
+            playing = False
+            break
+                                
+        if '_' not in guessed:
+            print("You got it!")
+            playing = False
+            break
+            
+            
+def hangman():
+    '''
+    This exercise is Part 3 of 3 of the Hangman exercise series.
+
+    In this exercise, we will finish building Hangman. In the game of Hangman, the player only has 6 incorrect guesses (head, body, 2 legs, and 2 arms) before they lose the game.
+
+    In Part 1, we loaded a random word list and picked a word from it. In Part 2, we wrote the logic for guessing the letter and displaying that information to the user. In this exercise, we have to put it all together and add logic for handling guesses.
+
+    Copy your code from Parts 1 and 2 into a new file as a starting point. Now add the following features:
+
+    Only let the user guess 6 times, and tell the user how many guesses they have left.
+    Keep track of the letters the user guessed. If the user guesses a letter they already guessed, don’t penalize them - let them guess again.
+    '''
+    
+    #print("This exercise is a game of hangman!\n")
+    
+    #print("You can type 'exit' at any time to end the game.")
+    
+    letters()
+    
+def birthday_dictionary(birthdays):
+    '''
+    This exercise is Part 1 of 4 of the birthday data exercise series.
+
+    For this exercise, we will keep track of when our friend’s birthdays are, and be able to find that information based on their name. Create a dictionary (in your file) of names and birthdays. When you run your program it should ask the user to enter a name, and return the birthday of that person back to them. The interaction should look something like this:
+
+    >>> Welcome to the birthday dictionary. We know the birthdays of:
+    Albert Einstein
+    Benjamin Franklin
+    Ada Lovelace
+    >>> Who's birthday do you want to look up?
+    Benjamin Franklin
+    >>> Benjamin Franklin's birthday is 01/17/1706.
+    '''
+    
+    print("This exercise defines a dictionary of birthdays.\n")
+    
+    if birthdays == None:
+        birthdays = {
+                     "Albert Einstein": '03/14/1879',
+                     "Benjamin Franklin": '01/17/1706',
+                     "Ada Lovelace": '12/10/1815'
+                     }
+           
+    print("The dictionary currently contains the birthdays of: ")
+    for name in birthdays:
+        print(name)
+        
+    name = input("\nWho's birthday would you like to know?: ")
+    
+    if name in birthdays:
+        print("{}'s birthday is {}.".format(name, birthdays[name]))
+    else:
+        print("Sorry, I don't know {}'s birthday.".format(name))
+        
+    return birthdays[name]
+
+    
+def birthday_json():
+    '''
+    This exercise is Part 2 of 4 of the birthday data exercise series.
+
+    In the previous exercise we created a dictionary of famous scientists’ birthdays. In this exercise, modify your program from Part 1 to load the birthday dictionary from a JSON file on disk, rather than having the dictionary defined in the program.
+
+    Bonus: Ask the user for another scientist’s name and birthday to add to the dictionary, and update the JSON file you have on disk with the scientist’s name. If you run the program multiple times and keep adding new names, your JSON file should keep getting bigger and bigger.
+    '''
+    
+    print("This exercise lets you add to a previously defined dictionary of birthdays.\n")
+    
+    import json
+
+    birthdays = dict()
+    
+    with open('birthdays.json', 'r') as f:
+        birthdays = json.load(f)
+        
+    what_to_do = input("Do you want to ADD a birthday to the dictionary or GET a birthday already in the dictionary? (ADD or GET): ")
+    
+    if what_to_do.lower() == 'get':
+        bday = birthday_dictionary(birthdays)
+    elif what_to_do.lower() == 'add':
+        new_name = input("Who's birthday would you like to add?: ")
+        bday = input("When is their birthday?: ")
+        birthdays[new_name] = bday
+        with open('birthdays.json', 'w') as f:
+            json.dump(birthdays, f)
+    
+    return bday
+    
+def birthday_months():
+    '''
+    This exercise is Part 3 of 4 of the birthday data exercise series.
+
+    In the previous exercise we saved information about famous scientists’ names and birthdays to disk. In this exercise, load that JSON file from disk, extract the months of all the birthdays, and count how many scientists have a birthday in each month.
+
+    Your program should output something like:
+
+    {
+        "May": 3,
+        "November": 2,
+        "December": 1
+    }
+    '''
+    
+    print("This exercise gets the months from a previously defined dictionary of birthdays.\n")
+    
+    import json
+    from collections import Counter
+    
+    month_to_string = {
+    1: "January",
+    2: "February",
+    3: "March",
+    4: "April",
+    5: "May",
+    6: "June",
+    7: "July",
+    8: "August",
+    9: "September",
+    10: "October",
+    11: "November",
+    12: "December"
+    }
+
+    birthdays = dict()
+    
+    with open('birthdays.json', 'r') as f:
+        birthdays = json.load(f)
+                       
+    months = []
+    for name,bday in birthdays.items():
+        month = int(bday.split('/')[0])
+        months.append(month_to_string[month])
+         
+    print(Counter(months))
+    
+    return month_to_string, Counter(months)
+    
+def birthday_plots():
+    '''
+    This exercise is Part 4 of 4 of the birthday data exercise series.
+
+    In the previous exercise we counted how many birthdays there are in each month in our dictionary of birthdays.
+
+    In this exercise, use the bokeh Python library to plot a histogram of which months the scientists have birthdays in! Just parse out the months (if you don’t know how, I suggest looking at the previous exercise or its solution) and draw your histogram.
+
+    If you are using a purely web-based interface for coding, this exercise won’t work for you, since it requires installing the bokeh Python package. Now might be a good time to install Python on your own computer.
+    '''
+    
+    from bokeh.plotting import figure, show, output_file
+    import math
+    
+    print("This exercise makes a histogram of the months from a previously defined dictionary of birthdays.\n")
+        
+    month_to_string, data = birthday_months()
+    
+    x = []
+    y = []
+    for key,value in data.items():
+        x.append(key)
+        y.append(value)
+        
+    output_file("birthday_hist.html")
+        
+    months = []
+    for key,value in month_to_string.items():
+        months.append(value)
+        
+    p=figure(x_range=months,
+             x_axis_label = 'Month',
+             y_axis_label = 'Count')
+    p.xaxis.major_label_orientation = math.pi/4
+    p.vbar(x=x,top=y,width=0.5, color='blue')
+    
+    show(p)
+    
+    
+    
 
 if __name__ == '__main__':
 
@@ -964,7 +1276,9 @@ if __name__ == '__main__':
                      '11':check_prime, '12':first_last, '13':fib, '14':remove_duplicates, '15': reverse_word,
                      '16':pass_gen, '17':read_web_page, '18':cows_bulls, '19':read_web_page_v2, '20':elem_search,
                      '21':read_web_page_v3, '22':read_file, '23':file_overlap, '24':draw_gameboard, '25':guessing_game_v2,
-                     '26':check_tic_tac_toe, '27':tic_tac_toe_input, '28':max_of_three, '29': tic_tac_toe} # What exercise corresponds to each function
+                     '26':check_tic_tac_toe, '27':tic_tac_toe_input, '28':max_of_three, '29': tic_tac_toe, '30':pick_word,
+                     '31':letters, '32':hangman, '33':birthday_dictionary, '34':birthday_json, '35':birthday_months,
+                     '36':birthday_plots} # What exercise corresponds to each function
 
     exercise = input("Which exercise do you want to run?: ")
     print("Exercise " + exercise)
