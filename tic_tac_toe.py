@@ -1,8 +1,8 @@
 '''
 File name: pythonpractice.py
 Author: Hannah Lewis
-Date created: 07/17/2020
-Date last modified: 08/02/2020
+Date created: 07/31/2020
+Date last modified: 08/03/2020
 Python Version: 3.7
 '''
     
@@ -157,10 +157,11 @@ def main():
     The final step is to put all these three components together to make a two-player Tic Tac Toe game! Your challenge in this exercise is to use the functions from those previous exercises all together in the same program to make a two-player game that you can play with a friend.
     '''
     
-    print("Ready to play a game of tic-tac-toe?")
-    print("You can type 'exit' at any time to end the game.")
-    print("Here's your game board:")
+    print("Ready to play a game of tic-tac-toe?\n")
     
+    print("You can type 'exit' at any time to end the game.\n")
+    
+    print("Here's your game board:")
     draw_gameboard(3) # Draw the empty board
     
     tic_tac_toe_input() # Play the game!
