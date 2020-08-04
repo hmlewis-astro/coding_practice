@@ -1152,7 +1152,7 @@ def birthday_json():
 
     birthdays = dict()
     
-    with open('birthdays.json', 'r') as f: # Open the birthday file
+    with open('ref_files/birthdays.json', 'r') as f: # Open the birthday file
         birthdays = json.load(f) # Read data
         
     what_to_do = input("Do you want to ADD a birthday to the dictionary or GET a birthday already in the dictionary? (ADD or GET): ")
@@ -1163,7 +1163,7 @@ def birthday_json():
         name = input("Who's birthday would you like to add?: ")
         bday = input("When is their birthday?: ")
         birthdays[name] = bday
-        with open('birthdays.json', 'w') as f: # Open the birthday file
+        with open('ref_files/birthdays.json', 'w') as f: # Open the birthday file
             json.dump(birthdays, f) # Write the new dictionary with the added birthday
     
     return name, bday
@@ -1197,7 +1197,7 @@ def birthday_months():
 
     birthdays = dict()
     
-    with open('birthdays.json', 'r') as f: # Open the birthday file
+    with open('ref_files/birthdays.json', 'r') as f: # Open the birthday file
         birthdays = json.load(f) # Read data
                        
     months = []
