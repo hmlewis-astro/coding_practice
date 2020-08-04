@@ -9,7 +9,7 @@ To run an example exercise:
 ```sh
 python pythonpractice.py
 ```
-You'll then be asked which example exercise you'd like to run. You can input any number between 1 and 36, where numbers correspond to those exercises listed on the [practicepython.org](practicepython.org) website. Some exercises require one or more of the ``.txt`` files included here. Be sure to pull the files you need!
+You'll then be asked which example exercise you'd like to run. You can input any number between 1 and 36, where numbers correspond to those exercises listed on the [practicepython.org](practicepython.org) website. Some exercises require one or more of the ``.txt`` files included in the ``ref_files`` folder. Be sure to pull the files you need!
 
 I've also made some the exercises that are games into their own programs so you can play them on their own, without needing to know which exercise they correspond to. You can play:
 
