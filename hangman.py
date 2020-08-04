@@ -16,7 +16,7 @@ def pick_word():
     '''
             
     words = []
-    with open('sowpods.txt','r') as f: # Open the SOWPODS dictionary txt files
+    with open('ref_files/sowpods.txt','r') as f: # Open the SOWPODS dictionary txt files
         line = f.readline() # Read line
         while line:
             words.append(line) # Add to the list of words

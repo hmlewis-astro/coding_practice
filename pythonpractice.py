@@ -621,7 +621,7 @@ def read_file():
     print("This exercise opens a predefined text file, reads the rows, and returns how many of each thing are in the file.\n")
     
     names_dict = {}
-    with open('nameslist.txt','r') as f: # Open the file of names
+    with open('ref_files/nameslist.txt','r') as f: # Open the file of names
         line = f.readline() # Read line
         while line:
             line = line.strip()
@@ -634,7 +634,7 @@ def read_file():
     print(names_dict)
     
     scenes_dict = {}
-    with open('SUNscenes.txt','r') as f:  # Open the SUN database
+    with open('ref_files/SUNscenes.txt','r') as f:  # Open the SUN database
         line = f.readline() # Read line
         while line:
             line = line[3:-26] # Crop off the random digits at the end
@@ -656,7 +656,7 @@ def file_overlap():
     print("This exercise opens two text files, containing lists of prime numbers and happy numbers, and finds the overlap of the numbers in the files.\n")
     
     primes = []
-    with open('primes.txt','r') as f: # Open the primes txt file
+    with open('ref_files/primes.txt','r') as f: # Open the primes txt file
         line = f.readline() # Read line
         while line:
             primes.append(int(line)) # Add to the list of primes
@@ -664,7 +664,7 @@ def file_overlap():
     primes = set(primes) # Make the list a set
     
     happy = []
-    with open('happy.txt','r') as f: # Open the happy txt files
+    with open('ref_files/happy.txt','r') as f: # Open the happy txt files
         line = f.readline() # Read line
         while line:
             happy.append(int(line)) # Add to the list of happy numbers
@@ -978,7 +978,7 @@ def pick_word():
     import random
     
     words = []
-    with open('sowpods.txt','r') as f: # Open the SOWPODS dictionary txt files
+    with open('ref_files/sowpods.txt','r') as f: # Open the SOWPODS dictionary txt files
         line = f.readline() # Read line
         while line:
             words.append(line) # Add to the list of words
